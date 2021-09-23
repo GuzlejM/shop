@@ -1,0 +1,53 @@
+1. Initial backend Setup
+
+a.) npm init -y // Start node and create pckg.json
+b.) npm init express mongoose dotenv nodemon 
+c.) 
+const express = require('express');
+const app = express();
+
+app.listen(5000, () => {
+    console.log('Server's on!)
+})
+d.) const mongoose = require('mongoose');
+
+
+2. MongoDB Atlas Cloud
+
+a.) Click Create Project -> 
+    - ADD NAME OF PROJECT
+b.) Create Database
+    - (Wait for creating new cluset taks 1-3 minuets)
+c.) Click Database Access
+    - ADD NEW DB USER -> FIll up form ADD USER
+d.) Click Network Access
+    - ADD IP ADRESS 
+    - Create 0.0.0.0
+e.) Click Databases
+    - Click Connect
+    - Connect your application
+    - Copy link mongodb+srv://Martin:<password>@cluster0.3x119.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
+
+3. Back to the backend code 
+
+a.) put link from 2/e/3 between imports and app.listen
+mongoose.connect("mongodb+srv://Martin:<password>@cluster0.3x119.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+b.) Change <password> for the real PASSWORD you created before in Atlas
+c.) in the link behnd .mongodb.net/myFirstDatabase change to name of the DB you created
+    in my case it's /shop
+d.) mongoose.connect() it's promise needs to be resolved
+ 'chain .then().catch(err)
+ e.) DB CONNECTION SUCCESSFULL
+f.) Create .env file (secret file for secret shit)
+    - you have to requere dotenv in the imports
+    and then dotenv.config()
+    - copy link from mongoose.connect() name it MONGO_URL
+g.) Insert/recognise ENV FILE inside mongoose.connect(process.env.MONGO_URL)
+h.) to app.listen (process.env.PORT || 5000)
+
+
+4. First Route Initialisation
+
+a.) app.get("/api/test", () => {
+    console.log("ESHOPIK");
+})
